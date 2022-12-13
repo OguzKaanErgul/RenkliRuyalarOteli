@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RenkliRuyalarOteli.BL\RenkliRuyalarOteli.BL.csproj" />
+    <ProjectReference Include="..\RenkliRuyalarOteli.DAL\RenkliRuyalarOteli.DAL.csproj" />
+    <ProjectReference Include="..\RenkliRuyalarOteli.Entities\RenkliRuyalarOteli.Entities.csproj" />
+  </ItemGroup>
+
+</Project>
