@@ -1,3 +1,5 @@
+using RenkliRuyalarOteli.WebMVCUI.Extensions;
+
 namespace RenkliRuyalarOteli.WebMVCUI
 {
     public class Program
@@ -8,14 +10,16 @@ namespace RenkliRuyalarOteli.WebMVCUI
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddRenkliRuyalarManager();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();

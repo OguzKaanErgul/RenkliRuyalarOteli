@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RenkliRuyalarOteli.DAL.Contexts;
 
@@ -11,9 +12,11 @@ using RenkliRuyalarOteli.DAL.Contexts;
 namespace RenkliRuyalarOteli.DAL.Migrations
 {
     [DbContext(typeof(SqlDbContext))]
-    partial class SqlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221214134922_initdb2")]
+    partial class initdb2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace RenkliRuyalarOteli.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("KullaniciRole", b =>
-                {
-                    b.Property<Guid>("KullanicilarId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("RollerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("KullanicilarId", "RollerId");
-
-                    b.HasIndex("RollerId");
-
-                    b.ToTable("KullaniciRole");
-                });
 
             modelBuilder.Entity("RenkliRuyalarOteli.Entities.Entities.Concrete.Kullanici", b =>
                 {
@@ -48,13 +36,14 @@ namespace RenkliRuyalarOteli.DAL.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
+                    b.Property<string>("CreateUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("KullaniciId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -100,6 +89,10 @@ namespace RenkliRuyalarOteli.DAL.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
+                    b.Property<string>("CreateUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("KullaniciId")
                         .HasColumnType("uniqueidentifier");
 
@@ -136,6 +129,10 @@ namespace RenkliRuyalarOteli.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+
+                    b.Property<string>("CreateUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Durum")
                         .HasColumnType("bit");
@@ -181,6 +178,10 @@ namespace RenkliRuyalarOteli.DAL.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
+                    b.Property<string>("CreateUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<float>("Fiyat")
                         .HasColumnType("real");
 
@@ -218,6 +219,10 @@ namespace RenkliRuyalarOteli.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+
+                    b.Property<string>("CreateUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("GirisTarihi")
                         .HasColumnType("datetime2");
@@ -264,6 +269,10 @@ namespace RenkliRuyalarOteli.DAL.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
+                    b.Property<string>("CreateUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("KullaniciId")
                         .HasColumnType("uniqueidentifier");
 
@@ -288,54 +297,6 @@ namespace RenkliRuyalarOteli.DAL.Migrations
                     b.HasIndex("RezervasyonId");
 
                     b.ToTable("RezervasyonDetaylari");
-                });
-
-            modelBuilder.Entity("RenkliRuyalarOteli.Entities.Entities.Concrete.Role", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreateDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
-
-                    b.Property<string>("KullaniciId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RoleName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleName")
-                        .IsUnique();
-
-                    b.ToTable("Roller");
-                });
-
-            modelBuilder.Entity("KullaniciRole", b =>
-                {
-                    b.HasOne("RenkliRuyalarOteli.Entities.Entities.Concrete.Kullanici", null)
-                        .WithMany()
-                        .HasForeignKey("KullanicilarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RenkliRuyalarOteli.Entities.Entities.Concrete.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RollerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("RenkliRuyalarOteli.Entities.Entities.Concrete.Musteri", b =>

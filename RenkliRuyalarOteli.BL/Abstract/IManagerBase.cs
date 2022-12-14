@@ -1,13 +1,10 @@
-﻿using RenkliRuyalarOteli.DAL.Contexts;
-using RenkliRuyalarOteli.Entities.Entities.Abstract;
+﻿using RenkliRuyalarOteli.Entities.Entities.Abstract;
 using System.Linq.Expressions;
 
-namespace RenkliRuyalarOteli.DAL.Abstract
+namespace RenkliRuyalarOteli.BL.Abstract
 {
-    public interface IRepositoryBase<T> where T : BaseEntity, new()
+    public interface IManagerBase<T> where T : BaseEntity, new()
     {
-        SqlDbContext dbContext { get; set; }
-
         Task<int> CreateAsync(T entity);
 
         Task<int> UpdateAsync(T entity);

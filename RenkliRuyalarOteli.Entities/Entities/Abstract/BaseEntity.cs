@@ -14,7 +14,7 @@
 
         public DateTime? UpdateTime { get; set; }
 
-        public string CreateUser { get; set; }
+        public string? KullaniciId { get; set; }
 
         public Status Status { get; set; } = Status.Active;
 
