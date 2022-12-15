@@ -13,6 +13,7 @@ namespace RenkliRuyalarOteli.WebMVCUI.Extensions
             services.AddScoped<IOdaFiyatManager, OdaFiyatManager>();
             services.AddScoped<IRezervasyonManager, RezervasyonManager>();
             services.AddScoped<IRezervasyonDetayManager, RezervasyonDetayManager>();
+            services.AddScoped<IRoleManager, RoleManager>();
 
             return services;
         }
