@@ -12,12 +12,14 @@ namespace RenkliRuyalarOteli.DAL.Concrete
 
         public RepositoryBase()
         {
+
+
             dbContext = new SqlDbContext();
         }
 
         public virtual async Task<int> CreateAsync(T entity)
         {
-            //isi yapmasini asenkron olarak bildiriyoruz
+            //işi yapmasini asenkron olarak bildiriyoruz
             await dbContext.Set<T>().AddAsync(entity);
             return await dbContext.SaveChangesAsync();
         }
@@ -33,10 +35,10 @@ namespace RenkliRuyalarOteli.DAL.Concrete
             dbContext.Set<T>().Remove(entity);
             return await dbContext.SaveChangesAsync();
         }
-
         public virtual async Task<T?> GetByIdAsync(string id)
         {
             return await dbContext.Set<T>().FindAsync(id);
+
         }
 
         public virtual async Task<T?> FindAsync(Expression<Func<T, bool>> filter = null)
@@ -45,15 +47,17 @@ namespace RenkliRuyalarOteli.DAL.Concrete
                 return await dbContext.Set<T>().Where(filter).FirstOrDefaultAsync();
             else
                 return await dbContext.Set<T>().FirstOrDefaultAsync();
+
         }
 
         public virtual async Task<ICollection<T>> RawSqlQuery(T entity, string sql)
         {
             var result = dbContext.Set<T>().FromSqlRaw(sql);
+
             return await result.ToListAsync();
         }
 
-        public virtual async Task<IList<T>?> FindAllAsync(Expression<Func<T, bool>> filter = null)
+        public virtual async Task<IList<T>> FindAllAsnyc(Expression<Func<T, bool>> filter = null)
         {
             if (filter != null)
                 return await dbContext.Set<T>().Where(filter).ToListAsync();
@@ -69,10 +73,14 @@ namespace RenkliRuyalarOteli.DAL.Concrete
             {
                 query.Where(filter);
             }
-            var result = include.Aggregate(query.AsQueryable(), (current, includeprop) => current.Include(includeprop));
+            var result = include.Aggregate(query.AsQueryable(),
+                                    (current, includeprop) => current.Include(includeprop));
             return result;
         }
 
-
+        public Task<IList<T>> FindAllAsync(Expression<Func<T, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

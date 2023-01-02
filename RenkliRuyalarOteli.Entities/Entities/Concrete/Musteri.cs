@@ -4,6 +4,7 @@ namespace RenkliRuyalarOteli.Entities.Entities.Concrete
 {
     public class Musteri : BaseEntity
     {
+
         public string Ad { get; set; }
 
         public string Soyad { get; set; }

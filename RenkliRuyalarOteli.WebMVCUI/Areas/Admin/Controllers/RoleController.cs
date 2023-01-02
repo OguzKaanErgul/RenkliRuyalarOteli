@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RenkliRuyalarOteli.BL.Abstract;
 
-namespace RenkliRuyalarOteli.WebMVCUI.Controllers
+namespace RenkliRuyalarOteli.WebMVCUI.Areas.Admin.Controllers
 {
     public class RoleController : Controller
     {
